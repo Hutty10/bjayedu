@@ -71,12 +71,12 @@ class SignUp extends ConsumerWidget {
                     const SizedBox(height: 10),
                     const CustomTextField(
                       name: 'Username',
-                      hintText: 'Adeola Victoria',
+                      hintText: 'Quamdeen Victoria',
                     ),
                     const SizedBox(height: 15),
                     const CustomTextField(
                       name: 'E-mail',
-                      hintText: 'adeolavictoria@gmail.com',
+                      hintText: 'Quamdeenvictoria@gmail.com',
                     ),
                     const SizedBox(height: 15),
                     const CustomTextField(

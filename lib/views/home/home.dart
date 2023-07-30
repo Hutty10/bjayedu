@@ -86,7 +86,7 @@ class Greatings extends StatelessWidget {
           ),
         ),
         Text(
-          'Adeola',
+          'Quamdeen',
           style: TextStyle(
             // color: Color(0xffE60CFF),
             fontSize: 20,
