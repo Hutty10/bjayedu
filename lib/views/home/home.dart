@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../widgets/greetings.dart';
+import '../../widgets/home_pageview.dart';
+
 class HomeView extends ConsumerWidget {
   const HomeView({super.key});
   static const route = '/home';
@@ -50,50 +53,9 @@ class HomeView extends ConsumerWidget {
             ),
           ),
           const SizedBox(height: 20),
-          // SizedBox(
-          //   height: 400,
-          //   child: PageView.builder(
-          //     itemCount: 3,
-          //     itemBuilder: (context, index) {
-          //       return GridView.builder(
-          //         gridDelegate: gridDelegate,
-          //         itemBuilder: itemBuilder,
-          //       );
-          //     },
-          //   ),
-          // ),
+          const PageViewWithIndicator()
         ],
       ),
-    );
-  }
-}
-
-class Greatings extends StatelessWidget {
-  const Greatings({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return const Row(
-      children: [
-        Text(
-          'Hi, ',
-          style: TextStyle(
-            color: Color(0xffE60CFF),
-            fontSize: 20,
-            fontWeight: FontWeight.w600,
-          ),
-        ),
-        Text(
-          'Quamdeen',
-          style: TextStyle(
-            // color: Color(0xffE60CFF),
-            fontSize: 20,
-            fontWeight: FontWeight.w600,
-          ),
-        ),
-      ],
     );
   }
 }

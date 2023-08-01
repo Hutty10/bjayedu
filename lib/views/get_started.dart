@@ -43,19 +43,6 @@ class GetStartedView extends StatelessWidget {
           ),
         ],
       ),
-      // body: Stack(
-      //   children: [
-      //     SvgPicture.asset(
-      //       'assets/images/getstarted_background.svg',
-      //       width: size.width,
-      //       height: size.height,
-      //     ),
-      //     Container(
-
-      //       child: const Column(),
-      //     )
-      //   ],
-      // ),
     );
   }
 }
