@@ -12,3 +12,4 @@ export '../views/home/grades/sixth_grade.dart';
 export '../views/home/grades/seventh_grade.dart';
 export '../views/home/grades/eighth_grade.dart';
 export '../views/home/grades/ninth_grade.dart';
+export '../views/profile/profile.dart';

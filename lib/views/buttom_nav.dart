@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-import '../controllers/auth.dart';
+import 'profile/profile.dart';
 
 class ButtomNav extends ConsumerStatefulWidget {
   ButtomNav({super.key, required String tab}) : index = indexFrom(tab);
@@ -19,7 +19,7 @@ class ButtomNav extends ConsumerStatefulWidget {
         return 1;
       case 'search':
         return 2;
-      case 'account':
+      case 'profile':
         return 3;
       default:
         return 0;
@@ -45,46 +45,38 @@ class _ButtomNavState extends ConsumerState<ButtomNav> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0,
-        leading: IconButton(
-          onPressed: ref.read(authProvider).logout,
-          iconSize: 30,
-          icon: const Icon(Icons.menu),
-        ),
-        actions: const [
-          Padding(
-            padding: EdgeInsets.all(8.0),
-            child: CircleAvatar(
-              backgroundImage: AssetImage('assets/images/avatar.png'),
-            ),
-          )
-        ],
-      ),
       body: IndexedStack(
         index: _selectedIndex,
         children: [
           const HomeView(),
           Container(color: Colors.green),
           Container(color: Colors.orange),
-          Container(color: Colors.black),
+          const ProfileView(),
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
         onTap: (index) {
           if (_selectedIndex != 0 && index == 0) {
+            setState(() {
+              _selectedIndex = 0;
+            });
             context.go(HomeView.route);
+          } else if (_selectedIndex != 1 && index == 1) {
+            setState(() {
+              _selectedIndex = 1;
+            });
+            // context.go(HomeView.route);
+          } else if (_selectedIndex != 2 && index == 2) {
+            setState(() {
+              _selectedIndex = 2;
+            });
+            // context.go(ProfileView.route);
+          } else if (_selectedIndex != 3 && index == 3) {
+            setState(() {
+              _selectedIndex = 3;
+            });
+            context.go(ProfileView.route);
           }
-          // } else if (_selectedIndex != 1 && index == 1) {
-          //   context.go(RoutePath.explore);
-          // } else if (_selectedIndex != 2 && index == 2) {
-          //   context.go(RoutePath.cart);
-          // } else if (_selectedIndex != 3 && index == 3) {
-          //   context.go(RoutePath.offer);
-          // } else if (_selectedIndex != 4 && index == 4) {
-          //   context.go(RoutePath.account);
-          // }
         },
         currentIndex: _selectedIndex,
         // selectedItemColor: theme.primaryColor,
@@ -113,8 +105,8 @@ class _ButtomNavState extends ConsumerState<ButtomNav> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person_outline),
-            label: 'Account',
-            tooltip: 'Account',
+            label: 'Profile',
+            tooltip: 'Profile',
           ),
         ],
       ),

@@ -29,7 +29,7 @@ final routerProvider = Provider<GoRouter>(
           builder: (_, __) => const Register(),
         ),
         GoRoute(
-          path: '/:tab(home|notification|search|account)',
+          path: '/:tab(home|notification|search|profile)',
           builder: (_, state) {
             final tab = state.pathParameters['tab']!;
             return ButtomNav(tab: tab);
@@ -37,8 +37,11 @@ final routerProvider = Provider<GoRouter>(
         ),
         GoRoute(
           path: HomeView.route,
-          // builder: (context, state) => const HomeView(),
           redirect: (_, __) => HomeView.route,
+        ),
+        GoRoute(
+          path: ProfileView.route,
+          redirect: (_, __) => ProfileView.route,
         ),
         GoRoute(
           path: FirstGrade.route,
