@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../controllers/auth.dart';
+
 class ButtomNav extends ConsumerStatefulWidget {
   ButtomNav({super.key, required String tab}) : index = indexFrom(tab);
   final int index;
@@ -42,9 +44,12 @@ class _ButtomNavState extends ConsumerState<ButtomNav> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
+        backgroundColor: Colors.white,
+        elevation: 0,
         leading: IconButton(
-          onPressed: () {},
+          onPressed: ref.read(authProvider).logout,
           iconSize: 30,
           icon: const Icon(Icons.menu),
         ),
@@ -89,6 +94,7 @@ class _ButtomNavState extends ConsumerState<ButtomNav> {
         iconSize: 30,
         showSelectedLabels: true,
         showUnselectedLabels: true,
+
         items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.home_outlined),

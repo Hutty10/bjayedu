@@ -8,8 +8,8 @@ import '../../widgets/button.dart';
 import '../../widgets/divider.dart';
 import '../../widgets/rich_text.dart';
 
-class SignUp extends ConsumerWidget {
-  const SignUp({super.key});
+class Register extends ConsumerWidget {
+  const Register({super.key});
   static const route = '/signup';
 
   @override

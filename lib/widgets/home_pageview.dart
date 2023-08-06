@@ -1,5 +1,7 @@
+import 'package:bjayedu/routers/route_export.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 import 'home_grade_card.dart';
 
@@ -53,21 +55,24 @@ class _PageViewWithIndicatorState extends ConsumerState<PageViewWithIndicator> {
                 _currentPage = value;
               },
             ),
-            children: const [
+            children: [
               GradwCards(
                 children: [
                   HomeGradCard(
-                    color: Color(0xffFFACAC),
+                    onTap: () => context.push(FirstGrade.route),
+                    color: const Color(0xffFFACAC),
                     image: 'assets/images/1st.png',
                     grade: '1st',
                   ),
                   HomeGradCard(
-                    color: Color(0xff00FF66),
+                    onTap: () => context.push(SecondGrade.route),
+                    color: const Color(0xff00FF66),
                     image: 'assets/images/2nd.png',
                     grade: '2nd',
                   ),
                   HomeGradCard(
-                    color: Color(0xffFFE040),
+                    onTap: () => context.push(ThirdGrade.route),
+                    color: const Color(0xffFFE040),
                     image: 'assets/images/3rd.png',
                     grade: '3rd',
                   ),
@@ -76,17 +81,20 @@ class _PageViewWithIndicatorState extends ConsumerState<PageViewWithIndicator> {
               GradwCards(
                 children: [
                   HomeGradCard(
-                    color: Color(0xffE60CFF),
+                    onTap: () => context.push(FourthGrade.route),
+                    color: const Color(0xffE60CFF),
                     image: 'assets/images/4th.png',
                     grade: '4th',
                   ),
                   HomeGradCard(
-                    color: Color(0xff75FFF7),
+                    onTap: () => context.push(FifthGrade.route),
+                    color: const Color(0xff75FFF7),
                     image: 'assets/images/5th.png',
                     grade: '4th',
                   ),
                   HomeGradCard(
-                    color: Color(0xff90A56E),
+                    onTap: () => context.push(SixthGrade.route),
+                    color: const Color(0xff90A56E),
                     image: 'assets/images/6th.png',
                     grade: '6th',
                   ),
@@ -95,17 +103,20 @@ class _PageViewWithIndicatorState extends ConsumerState<PageViewWithIndicator> {
               GradwCards(
                 children: [
                   HomeGradCard(
-                    color: Color(0xffFF007A),
+                    onTap: () => context.push(SeventhGrade.route),
+                    color: const Color(0xffFF007A),
                     image: 'assets/images/7th.png',
                     grade: '7th',
                   ),
                   HomeGradCard(
-                    color: Color(0xffA975FF),
+                    onTap: () => context.push(EighthGrade.route),
+                    color: const Color(0xffA975FF),
                     image: 'assets/images/8th.png',
                     grade: '8th',
                   ),
                   HomeGradCard(
-                    color: Color(0xffA8FF1A),
+                    onTap: () => context.push(NinthGrade.route),
+                    color: const Color(0xffA8FF1A),
                     image: 'assets/images/9th.png',
                     grade: '9th',
                   ),

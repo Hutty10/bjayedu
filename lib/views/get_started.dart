@@ -16,7 +16,7 @@ class GetStartedView extends StatelessWidget {
             size: size,
             child: Image.asset(
               'assets/images/getstarted.png',
-              fit: BoxFit.contain,
+              fit: BoxFit.cover,
             ),
           ),
           Container(

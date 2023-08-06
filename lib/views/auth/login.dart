@@ -1,18 +1,54 @@
-import 'package:bjayedu/views/auth/signup.dart';
+import 'dart:developer' show log;
+
+import 'package:bjayedu/views/auth/register.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../controllers/auth.dart';
 import '../../widgets/app_textfield.dart';
 import '../../widgets/rich_text.dart';
 import '../../widgets/sign_in_up_button.dart';
 
-class LoginView extends ConsumerWidget {
+class LoginView extends ConsumerStatefulWidget {
   const LoginView({super.key});
   static const route = '/login';
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<ConsumerStatefulWidget> createState() => _LoginViewState();
+}
+
+class _LoginViewState extends ConsumerState<LoginView> {
+  late GlobalKey<FormState> _formKey;
+  late TextEditingController _emailController, _passwordController;
+  @override
+  void initState() {
+    super.initState();
+    _formKey = GlobalKey<FormState>();
+    _emailController = TextEditingController();
+    _passwordController = TextEditingController();
+  }
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
+
+  void _tryLogin(BuildContext context,
+      {required String email, required String password}) async{
+    FocusScope.of(context).unfocus();
+    final bool? isFormValid = _formKey.currentState?.validate();
+    if (isFormValid != null && isFormValid) {
+      log('login pressed');
+      await ref.read(authProvider).login(email: email, password: password);
+      log('logining...kk');
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return GestureDetector(
       onTap: FocusScope.of(context).unfocus,
       child: Scaffold(
@@ -31,25 +67,22 @@ class LoginView extends ConsumerWidget {
                       topRight: Radius.circular(50),
                     ),
                   ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.end,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
-                      AppRichText(
-                        onTap: () => context.go(SignUp.route),
-                        baseText: 'Don’t have an account? ',
-                        subText: 'Sign up.',
+                      SignInUpButton(
+                          onPressed: () => context.go(Register.route),
+                          text: 'Sign Up',
+                          isSignIn: false),
+                      SignInUpButton(
+                        onPressed: () => _tryLogin(
+                          context,
+                          email: _emailController.text.trim(),
+                          password: _passwordController.text.trim(),
+                        ),
+                        text: 'Sign In',
                       ),
-                      const SizedBox(height: 10),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          SignInUpButton(
-                              onPressed: () => context.go(SignUp.route),
-                              text: 'Sign Up',
-                              isSignIn: false),
-                          SignInUpButton(onPressed: () {}, text: 'Sign In'),
-                        ],
-                      )
                     ],
                   ),
                 ),
@@ -58,20 +91,36 @@ class LoginView extends ConsumerWidget {
             Image.asset(
               'assets/images/login.png',
               fit: BoxFit.cover,
+              // height: ,
             ),
-            const Positioned(
-              top: 520,
-              right: 10,
-              child: CustomTextField(
-                name: 'E-mail',
+            Form(
+              key: _formKey,
+              child: ListView(
+                shrinkWrap: true,
+                padding: const EdgeInsets.only(top: 520),
+                children: [
+                  CustomTextField(
+                    controller: _emailController,
+                    hintText: 'adeolavictoria@gmail.com',
+                    name: 'E-mail',
+                  ),
+                  CustomTextField(
+                    controller: _passwordController,
+                    name: 'Password',
+                    isObscureText: true,
+                  ),
+                  const SizedBox(height: 30),
+                  Align(
+                    alignment: AlignmentDirectional.center,
+                    child: AppRichText(
+                      onTap: () => context.go(Register.route),
+                      baseText: 'Don’t have an account? ',
+                      subText: 'Sign up.',
+                    ),
+                  ),
+                ],
               ),
             ),
-            const Positioned(
-              top: 620,
-              child: CustomTextField(
-                name: 'Password',
-              ),
-            )
           ],
         ),
       ),

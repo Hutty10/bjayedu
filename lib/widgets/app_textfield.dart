@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 class CustomTextField extends StatelessWidget {
   const CustomTextField({
     super.key,
+    this.controller,
     required this.name,
     this.hintText,
     this.isObscureText = false,
   });
+  final TextEditingController? controller;
   final String name;
   final String? hintText;
   final bool isObscureText;
@@ -14,6 +16,7 @@ class CustomTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.sizeOf(context);
+
     return Align(
       alignment: Alignment.center,
       child: Card(
@@ -36,9 +39,13 @@ class CustomTextField extends StatelessWidget {
                 height: 20,
                 width: size.width - 40,
                 child: TextFormField(
+                  controller: controller,
                   obscureText: isObscureText,
                   decoration: InputDecoration.collapsed(
                     hintText: isObscureText ? '********' : hintText,
+                    hintStyle: TextStyle(
+                      color: Colors.grey.withOpacity(.5),
+                    ),
                     fillColor: Colors.white,
                   ),
                 ),

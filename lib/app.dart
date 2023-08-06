@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import './routers/routers.dart';
 
@@ -17,6 +18,16 @@ class MyApp extends ConsumerWidget {
         useMaterial3: true,
       ),
       routerConfig: router,
+      builder: (context, child) => ScreenUtilInit(
+        designSize: const Size(375, 812),
+        splitScreenMode: true,
+        useInheritedMediaQuery: true,
+        builder: (context, child) => MediaQuery(
+          data: MediaQuery.of(context).copyWith(textScaleFactor: 1),
+          child: child!,
+        ),
+        child: child,
+      ),
     );
   }
 }
