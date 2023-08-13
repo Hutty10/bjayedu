@@ -1,11 +1,11 @@
 import 'dart:developer' show log;
 
-import 'package:bjayedu/views/auth/register.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../controllers/auth.dart';
+import './register.dart';
+import '../../controllers/providers.dart';
 import '../../widgets/app_textfield.dart';
 import '../../widgets/rich_text.dart';
 import '../../widgets/sign_in_up_button.dart';
@@ -37,7 +37,7 @@ class _LoginViewState extends ConsumerState<LoginView> {
   }
 
   void _tryLogin(BuildContext context,
-      {required String email, required String password}) async{
+      {required String email, required String password}) async {
     FocusScope.of(context).unfocus();
     final bool? isFormValid = _formKey.currentState?.validate();
     if (isFormValid != null && isFormValid) {
@@ -72,7 +72,7 @@ class _LoginViewState extends ConsumerState<LoginView> {
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       SignInUpButton(
-                          onPressed: () => context.go(Register.route),
+                          onPressed: () => context.go(RegisterView.route),
                           text: 'Sign Up',
                           isSignIn: false),
                       SignInUpButton(
@@ -113,7 +113,7 @@ class _LoginViewState extends ConsumerState<LoginView> {
                   Align(
                     alignment: AlignmentDirectional.center,
                     child: AppRichText(
-                      onTap: () => context.go(Register.route),
+                      onTap: () => context.go(RegisterView.route),
                       baseText: 'Don’t have an account? ',
                       subText: 'Sign up.',
                     ),

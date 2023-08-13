@@ -2,24 +2,29 @@ import 'dart:developer' show log;
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+
+import 'providers.dart';
 
 class AuthControllers {
-  final FirebaseAuth firebaseAuth;
-  final FirebaseFirestore firestore;
-  const AuthControllers({required this.firebaseAuth, required this.firestore});
+  final Ref ref;
+  // final FirebaseAuth firebaseAuth;
+  // final FirebaseFirestore firestore;
+  const AuthControllers(
+        this.ref
+      );
 
   Future<void> register(
       {required String email,
       required String password,
-      required String userName}) async {
+      required String username}) async {
     try {
+      final firebaseAuth = ref.read(firebaseAuthProvider);
       final user = await firebaseAuth.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
       if (user.user != null) {
-        user.user!.updateDisplayName(userName);
+        user.user!.updateDisplayName(username);
       }
       log("${user.user?.uid}\n${user.user?.displayName}");
     } on FirebaseAuthException catch (e) {
@@ -29,6 +34,7 @@ class AuthControllers {
 
   Future<void> login({required String email, required String password}) async {
     try {
+      final firebaseAuth = ref.read(firebaseAuthProvider);
       final user = await firebaseAuth.signInWithEmailAndPassword(
           email: email, password: password);
       log('${user.user?.uid}');
@@ -37,8 +43,22 @@ class AuthControllers {
     }
   }
 
+  // void tryVerifyAndUpdatePhoneNumber(String phoneNumber) async {
+  //     final firebaseAuth = ref.read(firebaseAuthProvider);
+  //   await firebaseAuth.verifyPhoneNumber(
+  //     phoneNumber: phoneNumber,
+  //     verificationCompleted: (credential) async {
+  //       await firebaseAuth.currentUser!.updatePhoneNumber(credential);
+  //     },
+  //     verificationFailed: (err) {},
+  //     codeSent: (codeSent, [_]) {},
+  //     codeAutoRetrievalTimeout: (retry) {},
+  //   );
+  // }
+
   Future<void> logout() async {
     try {
+      final firebaseAuth = ref.read(firebaseAuthProvider);
       await firebaseAuth.signOut();
     } on FirebaseAuthException catch (e) {
       log(e.message.toString());
@@ -46,13 +66,4 @@ class AuthControllers {
   }
 }
 
-final authProvider = Provider<AuthControllers>(
-  (ref) => AuthControllers(
-    firebaseAuth: FirebaseAuth.instance,
-    firestore: FirebaseFirestore.instance,
-  ),
-);
 
-final authStateProvider = StreamProvider<User?>((ref) {
-  return FirebaseAuth.instance.authStateChanges();
-},);

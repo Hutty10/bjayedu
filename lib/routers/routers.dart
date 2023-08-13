@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-import '../controllers/auth.dart';
+import '../controllers/providers.dart';
 import './route_export.dart';
 
 final _key = GlobalKey<NavigatorState>();
@@ -10,6 +10,7 @@ final _key = GlobalKey<NavigatorState>();
 final routerProvider = Provider<GoRouter>(
   (ref) {
     final authState = ref.watch(authStateProvider);
+    final getStarted = ref.watch(getStartedProvider);
 
     return GoRouter(
       navigatorKey: _key,
@@ -25,8 +26,8 @@ final routerProvider = Provider<GoRouter>(
           builder: (_, __) => const LoginView(),
         ),
         GoRoute(
-          path: Register.route,
-          builder: (_, __) => const Register(),
+          path: RegisterView.route,
+          builder: (_, __) => const RegisterView(),
         ),
         GoRoute(
           path: '/:tab(home|notification|search|profile)',
@@ -96,12 +97,22 @@ final routerProvider = Provider<GoRouter>(
         // }
 
         final isLoggingIn = state.matchedLocation == LoginView.route;
-        if (isLoggingIn) return isAuth ? HomeView.route : null;
+        if (isLoggingIn) {
+          return isAuth
+              ? getStarted
+                  ? HomeView.route
+                  : GetStartedView.route
+              : null;
+        }
 
-        final isRegistering = state.matchedLocation == Register.route;
+        final isRegistering = state.matchedLocation == RegisterView.route;
         if (isRegistering) return isAuth ? HomeView.route : null;
 
-        return isAuth ? null : LoginView.route;
+        return isAuth
+            ? null
+            : getStarted
+                ? LoginView.route
+                : GetStartedView.route;
       },
     );
   },

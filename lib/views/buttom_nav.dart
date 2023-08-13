@@ -43,72 +43,75 @@ class _ButtomNavState extends ConsumerState<ButtomNav> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: IndexedStack(
-        index: _selectedIndex,
-        children: [
-          const HomeView(),
-          Container(color: Colors.green),
-          Container(color: Colors.orange),
-          const ProfileView(),
-        ],
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        onTap: (index) {
-          if (_selectedIndex != 0 && index == 0) {
-            setState(() {
-              _selectedIndex = 0;
-            });
-            context.go(HomeView.route);
-          } else if (_selectedIndex != 1 && index == 1) {
-            setState(() {
-              _selectedIndex = 1;
-            });
-            // context.go(HomeView.route);
-          } else if (_selectedIndex != 2 && index == 2) {
-            setState(() {
-              _selectedIndex = 2;
-            });
-            // context.go(ProfileView.route);
-          } else if (_selectedIndex != 3 && index == 3) {
-            setState(() {
-              _selectedIndex = 3;
-            });
-            context.go(ProfileView.route);
-          }
-        },
-        currentIndex: _selectedIndex,
-        // selectedItemColor: theme.primaryColor,
-        // unselectedItemColor: theme.colorScheme.onSurface,
-        type: BottomNavigationBarType.fixed,
-        landscapeLayout: BottomNavigationBarLandscapeLayout.centered,
-        iconSize: 30,
-        showSelectedLabels: true,
-        showUnselectedLabels: true,
+    return GestureDetector(
+      onTap: FocusScope.of(context).unfocus,
+      child: Scaffold(
+        backgroundColor: Colors.white,
+        body: IndexedStack(
+          index: _selectedIndex,
+          children: [
+            const HomeView(),
+            Container(color: Colors.green),
+            Container(color: Colors.orange),
+            const ProfileView(),
+          ],
+        ),
+        bottomNavigationBar: BottomNavigationBar(
+          onTap: (index) {
+            if (_selectedIndex != 0 && index == 0) {
+              setState(() {
+                _selectedIndex = 0;
+              });
+              context.go(HomeView.route);
+            } else if (_selectedIndex != 1 && index == 1) {
+              setState(() {
+                _selectedIndex = 1;
+              });
+              // context.go(HomeView.route);
+            } else if (_selectedIndex != 2 && index == 2) {
+              setState(() {
+                _selectedIndex = 2;
+              });
+              // context.go(ProfileView.route);
+            } else if (_selectedIndex != 3 && index == 3) {
+              setState(() {
+                _selectedIndex = 3;
+              });
+              context.go(ProfileView.route);
+            }
+          },
+          currentIndex: _selectedIndex,
+          // selectedItemColor: theme.primaryColor,
+          // unselectedItemColor: theme.colorScheme.onSurface,
+          type: BottomNavigationBarType.fixed,
+          landscapeLayout: BottomNavigationBarLandscapeLayout.centered,
+          iconSize: 30,
+          showSelectedLabels: true,
+          showUnselectedLabels: true,
 
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home_outlined),
-            label: 'Home',
-            tooltip: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.notifications_outlined),
-            label: 'notifications',
-            tooltip: 'notifications',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.search_outlined),
-            label: 'search',
-            tooltip: 'search',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person_outline),
-            label: 'Profile',
-            tooltip: 'Profile',
-          ),
-        ],
+          items: const [
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home_outlined),
+              label: 'Home',
+              tooltip: 'Home',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.notifications_outlined),
+              label: 'notifications',
+              tooltip: 'notifications',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.search_outlined),
+              label: 'search',
+              tooltip: 'search',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.person_outline),
+              label: 'Profile',
+              tooltip: 'Profile',
+            ),
+          ],
+        ),
       ),
     );
   }

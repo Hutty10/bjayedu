@@ -1,5 +1,6 @@
 import 'package:bjayedu/routers/route_export.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
@@ -50,24 +51,31 @@ class GetStartedView extends StatelessWidget {
           Positioned(
             bottom: 20,
             right: 10,
-            child: ElevatedButton(
-              onPressed: () => context.go(LoginView.route),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: const Color(0xffE60CFF),
-                //  minimumSize: const Size(64),
-              ),
-              child: const Text(
-                'Get Started',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 22,
-                  fontWeight: FontWeight.w700,
+            child: Consumer(builder: (context, ref, child) {
+              return ElevatedButton(
+                onPressed: () {
+                  ref.read(getStartedProvider.notifier).state = true;
+                  // context.go(LoginView.route);
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color(0xffE60CFF),
+                  //  minimumSize: const Size(64),
                 ),
-              ),
-            ),
+                child: const Text(
+                  'Get Started',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 22,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+              );
+            }),
           ),
         ],
       ),
     );
   }
 }
+
+final getStartedProvider = StateProvider<bool>((ref) => false);
