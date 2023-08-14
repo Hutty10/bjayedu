@@ -26,3 +26,10 @@ final authStateProvider = StreamProvider<User?>(
 final dbProvider = Provider<DBController>((ref) {
   return DBController(ref);
 });
+
+final usernameProvider = FutureProvider<String>(
+  (ref) => ref.read(dbProvider).getUsername,
+);
+final emailProvider = FutureProvider<String>(
+  (ref) => ref.read(dbProvider).getEmail,
+);

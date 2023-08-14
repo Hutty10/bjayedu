@@ -7,6 +7,15 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 class DBController {
   final Ref ref;
   const DBController(this.ref);
+  Future<String> get getUsername async {
+    final User? currentUser = ref.read(firebaseAuthProvider).currentUser;
+    return currentUser!.displayName!;
+  }
+
+  String get getEmail {
+    final User? currentUser = ref.read(firebaseAuthProvider).currentUser;
+    return currentUser!.email!;
+  }
 
   void setORUpdateProfile({String? phoneNumber, String? bio}) async {
     final User? currentUser = ref.read(firebaseAuthProvider).currentUser;

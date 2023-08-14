@@ -4,11 +4,13 @@ class CustomTextField extends StatelessWidget {
   const CustomTextField({
     super.key,
     this.controller,
+    this.validator,
     required this.name,
     this.hintText,
     this.isObscureText = false,
   });
   final TextEditingController? controller;
+  final FormFieldValidator? validator;
   final String name;
   final String? hintText;
   final bool isObscureText;
@@ -40,6 +42,7 @@ class CustomTextField extends StatelessWidget {
                 width: size.width - 40,
                 child: TextFormField(
                   controller: controller,
+                  validator: validator,
                   obscureText: isObscureText,
                   decoration: InputDecoration.collapsed(
                     hintText: isObscureText ? '********' : hintText,

@@ -4,7 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SeventhGrade extends ConsumerWidget {
   const SeventhGrade({super.key});
-  static const String route = '/seventh-grade';
+  static const String route = 'seventh-grade';
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -61,8 +61,8 @@ class SeventhGrade extends ConsumerWidget {
             ),
           ),
           SizedBox(height: 100.h),
-          SizedBox(
-            height: size.height * .45,
+          Expanded(
+            // height: size.height * .45,
             child: GridView.builder(
               padding: const EdgeInsets.all(20),
               itemCount: 4,

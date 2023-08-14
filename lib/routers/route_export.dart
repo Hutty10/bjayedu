@@ -1,7 +1,7 @@
 export '../views/get_started.dart';
 export '../views/auth/login.dart';
 export '../views/auth/register.dart';
-export '../views/buttom_nav.dart';
+export '../views/scaffold_with_nested_navigation.dart';
 export '../views/home/home.dart';
 export '../views/home/grades/first_grade.dart';
 export '../views/home/grades/second_grade.dart';

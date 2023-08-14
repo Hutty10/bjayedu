@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../controllers/providers.dart';
 import '../../widgets/greetings.dart';
@@ -40,11 +41,13 @@ class HomeView extends ConsumerWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const SizedBox(
+                  SizedBox(
                     height: 50,
-                    width: 200,
-                    child: TextField(
-                      decoration: InputDecoration.collapsed(hintText: null),
+                    width: 260.w,
+                    child: const TextField(
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(borderSide: BorderSide.none),
+                      ),
                     ),
                   ),
                   Container(

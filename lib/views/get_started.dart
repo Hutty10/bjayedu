@@ -1,8 +1,9 @@
-import 'package:bjayedu/routers/route_export.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+
+import 'auth/login.dart';
 
 class GetStartedView extends StatelessWidget {
   const GetStartedView({super.key});
@@ -54,8 +55,8 @@ class GetStartedView extends StatelessWidget {
             child: Consumer(builder: (context, ref, child) {
               return ElevatedButton(
                 onPressed: () {
-                  ref.read(getStartedProvider.notifier).state = true;
-                  // context.go(LoginView.route);
+                  // ref.read(getStartedProvider.notifier).state = true;
+                  context.go(LoginView.route);
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color(0xffE60CFF),
